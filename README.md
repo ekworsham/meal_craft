@@ -1,3 +1,11 @@
+MealCraft is a simple meal‑planning web app that lets users create weekly meal plans and store basic recipes. It helps people quickly organize what they’ll eat and generate a simple grocery list. The app is designed for anyone who wants an easy way to plan meals.
+
+Mike Bowman
+Keith Worshmam
+Pam Worsham
+Benedicta Etim
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
