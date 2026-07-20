@@ -5,6 +5,21 @@ Keith Worshmam
 Pam Worsham
 Benedicta Etim
 
+Epic 8 – Team Workflow (Recurring)
+These are recurring responsibilities rather than one-time issues.
+******Weekly Sprint Planning*****
+*Rotate meeting facilitator each week
+*Review backlog and assign issues
+*Set sprint goals
+*Update GitHub Project Board
+*****Code Reviews*****
+*Every Pull Request reviewed by at least one teammate
+*Target 24-hour review turnaround
+*Verify code style, functionality, and documentation
+*****Daily/Asynchronous Communication*****
+*Post progress updates in team chat
+*Raise blockers early
+*Keep issue status current (Not Started → In Progress → Review → Done)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
