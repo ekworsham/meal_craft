@@ -3,45 +3,35 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/login", label: "Login" },
+];
+
 export default function NavLinks() {
-    const pathname = usePathname();
-    return (
-        <nav className="max-w-4xl mx-auto px-4">
-            <ul className="flex gap-6">
-                <li>
-                    <Link
-                        href="/"
-                        className={
-                            pathname === "/"
-                                ? "font-semibold text-yellow-300"
-                                : "text-white hover:text-yellow-200"
-                        }
-                    >
-                        Home
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        href="/login"
-                        className={
-                            pathname === "/login"
-                                ? "font-semibold text-yellow-300"
-                                : "text-white hover:text-yellow-200"
-                        }
-                    >Login</Link>
-                </li>
-                <li>
+  const pathname = usePathname();
+
+  return (
+    <nav>
+      <ul className="flex items-center gap-6 text-sm font-medium">
+        {links.map((link) => {
+          const isActive = pathname === link.href;
+
+            return (
+                <li key={link.href}>
                 <Link
-                    href="/aboutUS"
-                    className={
-                        pathname === "/aboutUS"
-                            ? "font-semibold text-yellow-300"
-                            : "text-white hover:text-yellow-200"
-                    }
-                >About Us
-                    </Link>
-                    </li>
-            </ul>
-        </nav>
-    );
+              href={link.href} className={`transition-colors duration-200 ${
+                  isActive
+                    ? "font-semibold text-[#F77F00] border-b-2 border-[#F77F00] pb-1"
+                    : "text-white hover:text-[#0077B6]"
+                }`}
+              >
+                {link.label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
 }
