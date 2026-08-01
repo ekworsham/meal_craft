@@ -9,13 +9,20 @@ export default function Header() {
   });
 
   return (
-    <header className="bg-sky-900 text-white shadow">
-      <div className="page-container flex items-center justify-between py-4">
+    <header className="bg-primary text-white shadow-md border-b border-white/10">
+      <div className="page-container flex flex-col gap-4 py-5 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-bold">
-            Welcome to MealCraft your Food making assistant
+          <h1 className="text-3xl font-bold text-white">
+            Meal<span className="text-accent">Craft</span>
           </h1>
-          <p className="text-sm opacity-90">{today}</p>
+
+          <p className="text-sm text-slate-200">
+            Discover, Create & Share Amazing Recipes
+          </p>
+
+          <p className="text-xs text-slate-300 mt-1">
+            {today}
+          </p>
         </div>
 
         <NavLinks />

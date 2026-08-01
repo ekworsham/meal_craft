@@ -25,7 +25,7 @@ agent: speckit.checklist
 
 ## Database
 
-- [ ] MongoDB connected
+- [ ] Neon connected
 - [ ] Data persists correctly
 
 ## UI
