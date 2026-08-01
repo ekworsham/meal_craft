@@ -17,6 +17,8 @@ export async function getRecipes(query: string = '', currentPage: number = 1): P
     WHERE
       title ILIKE ${searchTerm}
         or instructions ILIKE ${searchTerm}
+      ORDER BY id DESC
+    LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
   `;
   console.log(rows);
   return rows as unknown as MyRecipes[];
@@ -52,13 +54,15 @@ export async function addRecipes(
   data: Omit<MyRecipes, 'id'>
 ): Promise<MyRecipes> {
   const rows = await sql`
-    INSERT INTO recipes (
+      INSERT INTO recipes (
       title,
-      instructions
+      instructions,
+      userid
     )
     VALUES (
       ${data.title},
-      ${data.instructions}
+      ${data.instructions},
+      1
     )
     RETURNING
         id,
