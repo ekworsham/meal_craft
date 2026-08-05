@@ -1,15 +1,18 @@
 "use client";
 
+import type { Session } from "next-auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 import { logout } from "@/lib/actions";
 
-export default function NavLinks() {
+type NavLinksProps = {
+  session: Session | null;
+};
+
+export default function NavLinks({ session }: NavLinksProps) {
   const pathname = usePathname();
-  const { status } = useSession();
- 
+
   const linkClass = (href: string) =>
     pathname === href
       ? "text-[#F77F00] font-semibold"
@@ -29,7 +32,7 @@ export default function NavLinks() {
         </Link>
       </li>
 
-      {status === "authenticated" ? (
+      {session ? (
         <li>
           <form action={logout}>
             <button

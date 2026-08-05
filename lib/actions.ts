@@ -20,7 +20,7 @@ async function requireAuthenticatedUser() {
   const session = await auth();
 
   if (!session?.user) {
-    throw new Error('You must be signed in to perform this action.');
+    return null;
   }
 
   return session.user;
@@ -31,7 +31,11 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    await signIn('credentials', formData);
+    await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirectTo: '/recipes',
+    });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -47,7 +51,9 @@ export async function authenticate(
 }
 
 export async function logout() {
-  await signOut();
+  await signOut({
+    redirectTo: "/",
+  });
 }
 
 const CreateUserSchema = z.object({
@@ -117,7 +123,12 @@ const RecipeSchema = z.object({
 });
 
 export async function createRecipe(formData: FormData) {
-   await requireAuthenticatedUser();
+  const user = await requireAuthenticatedUser();
+
+  if (!user) {
+    throw new Error('You must be signed in to add a recipe.');
+  }
+
   const validatedFields = RecipeSchema.safeParse({
     title: formData.get('title'),
     instructions: formData.get('instructions'),
@@ -134,7 +145,12 @@ export async function createRecipe(formData: FormData) {
 }
 
 export async function editRecipe(id: number, formData: FormData) {
-   await requireAuthenticatedUser();
+  const user = await requireAuthenticatedUser();
+
+  if (!user) {
+    throw new Error('You must be signed in to edit a recipe.');
+  }
+
   const validatedFields = RecipeSchema.safeParse({
     title: formData.get('title'),
     instructions: formData.get('instructions'),
@@ -150,9 +166,21 @@ export async function editRecipe(id: number, formData: FormData) {
   redirect('/recipes');
 }
 
-export async function removeRecipe(id: number) {
-   await requireAuthenticatedUser();
+export async function removeRecipe(
+  id: number,
+  prevState: string | undefined
+): Promise<string | undefined> {
+  void prevState;
+
+  const user = await requireAuthenticatedUser();
+
+  if (!user) {
+    return "You must be signed in to delete a recipe.";
+  }
+
   await deleteRecipe(id);
 
-  revalidatePath('/recipes');
+  revalidatePath("/recipes");
+
+  return "Recipe deleted successfully.";
 }

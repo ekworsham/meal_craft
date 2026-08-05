@@ -1,6 +1,14 @@
 import { createRecipe } from "@/lib/actions";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
-export default function NewRecipePage() {
+export default async function NewRecipePage() {
+  const session = await auth();
+
+  if (!session?.user) {
+    redirect("/login");
+  }
+
   return (
     <main className="max-w-2xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Add New Recipe</h1>

@@ -1,6 +1,12 @@
+import type { Session } from "next-auth";
+
 import NavLinks from "./NavLinks";
 
-export default function Header() {
+type HeaderProps = {
+  session: Session | null;
+};
+
+export default function Header({ session }: HeaderProps) {
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
@@ -25,7 +31,7 @@ export default function Header() {
           </p>
         </div>
 
-        <NavLinks />
+        <NavLinks session={session} />
       </div>
     </header>
   );

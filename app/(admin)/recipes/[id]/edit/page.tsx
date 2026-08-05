@@ -1,12 +1,20 @@
 // recipes/[id]/edit/page.tsx
+import { auth } from "@/auth";
 import { getRecipeById } from "@/lib/recipe-db";
 import { editRecipe } from "@/lib/actions";
+import { redirect } from "next/navigation";
 
 export default async function EditRecipePage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const session = await auth();
+
+  if (!session?.user) {
+    redirect("/login");
+  }
+
   const { id } = await params;
 
   const recipe = await getRecipeById(Number(id));

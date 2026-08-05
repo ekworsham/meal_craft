@@ -5,14 +5,13 @@ export const authConfig = {
   pages: {
     signIn: '/login',
   },
-
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
 
       const isProtected =
         nextUrl.pathname.startsWith('/recipes/new') ||
-        nextUrl.pathname.includes('/edit') ||
+        /\/recipes\/[^/]+\/edit$/.test(nextUrl.pathname) ||
         nextUrl.pathname.startsWith('/profile');
 
       if (isProtected) {
@@ -26,6 +25,5 @@ export const authConfig = {
       return true;
     },
   },
-
-  providers: [],
+  providers: [], // providers are added in auth.ts
 } satisfies NextAuthConfig;

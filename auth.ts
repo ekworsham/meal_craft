@@ -22,9 +22,13 @@ export const { auth, signIn, signOut, handlers, } = NextAuth({
         if (!user) return null;
 
         const passwordsMatch = await bcrypt.compare(password, user.passwordHash);
-        if (passwordsMatch) return user;
+        if (!passwordsMatch) return null;
 
-        return null;
+       return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        };
       },
     }),
   ],
