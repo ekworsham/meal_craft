@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { signIn, signOut } from '@/auth';
+import { auth, signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcryptjs';
 import { neon } from '@neondatabase/serverless';
@@ -15,6 +15,16 @@ import {
 } from '@/lib/recipe-db';
 
 const sql = neon(process.env.DATABASE_URL!);
+
+async function requireAuthenticatedUser() {
+  const session = await auth();
+
+  if (!session?.user) {
+    throw new Error('You must be signed in to perform this action.');
+  }
+
+  return session.user;
+}
 
 export async function authenticate(
   prevState: string | undefined,
@@ -107,6 +117,7 @@ const RecipeSchema = z.object({
 });
 
 export async function createRecipe(formData: FormData) {
+   await requireAuthenticatedUser();
   const validatedFields = RecipeSchema.safeParse({
     title: formData.get('title'),
     instructions: formData.get('instructions'),
@@ -123,6 +134,7 @@ export async function createRecipe(formData: FormData) {
 }
 
 export async function editRecipe(id: number, formData: FormData) {
+   await requireAuthenticatedUser();
   const validatedFields = RecipeSchema.safeParse({
     title: formData.get('title'),
     instructions: formData.get('instructions'),
@@ -139,6 +151,7 @@ export async function editRecipe(id: number, formData: FormData) {
 }
 
 export async function removeRecipe(id: number) {
+   await requireAuthenticatedUser();
   await deleteRecipe(id);
 
   revalidatePath('/recipes');
