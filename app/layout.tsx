@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AuthProvider from "@/components/AuthProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
       className={`${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <AuthProvider>
         <Header />
 
         <main className="flex-1">
@@ -33,6 +35,7 @@ export default function RootLayout({
         </main>
 
         <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
