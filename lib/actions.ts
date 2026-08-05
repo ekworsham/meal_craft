@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { signIn } from '@/auth';
+import { signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcryptjs';
 import { neon } from '@neondatabase/serverless';
@@ -34,6 +34,10 @@ export async function authenticate(
 
     throw error;
   }
+}
+
+export async function logout() {
+  await signOut();
 }
 
 const CreateUserSchema = z.object({
