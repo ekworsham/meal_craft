@@ -3,27 +3,29 @@ import type { NextAuthConfig } from 'next-auth';
 
 export const authConfig = {
   pages: {
-    signIn: '/login', // use your own login page instead of the Auth.js default
+    signIn: '/login',
   },
+
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
 
-      // Protect all routes under /dashboard
-      const isProtected = nextUrl.pathname.startsWith('/dashboard');
+      const isProtected =
+        nextUrl.pathname.startsWith('/recipes/new') ||
+        nextUrl.pathname.includes('/edit') ||
+        nextUrl.pathname.startsWith('/profile');
 
       if (isProtected) {
-        if (isLoggedIn) return true;
-        return false; // redirects to /login
+        return isLoggedIn;
       }
 
-      // Redirect already-logged-in users away from the login page
       if (isLoggedIn && nextUrl.pathname === '/login') {
-        return Response.redirect(new URL('/dashboard', nextUrl));
+        return Response.redirect(new URL('/recipes', nextUrl));
       }
 
       return true;
     },
   },
-  providers: [], // providers are added in auth.ts
+
+  providers: [],
 } satisfies NextAuthConfig;

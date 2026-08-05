@@ -3,7 +3,7 @@
 import { useActionState, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-import { authenticate, createUser } from "@/lib/actions";
+import { authenticate, createUser, logout, } from "@/lib/actions";
 
 export function LoginForm() {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
@@ -207,6 +207,14 @@ export function LoginForm() {
               {registerMessage}
             </p>
           )}
+        </form>
+         <form action={logout} className="mt-8">
+          <button
+            type="submit"
+            className="w-full rounded-lg border border-red-600 px-6 py-3 font-semibold text-red-600 hover:bg-red-50"
+          >
+            Sign Out
+          </button>
         </form>
       </section>
     </div>

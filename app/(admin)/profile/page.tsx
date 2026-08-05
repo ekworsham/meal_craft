@@ -1,5 +1,6 @@
 import ProfileCard from "@/components/ProfileCard";
 import ProfileForm from "@/components/ProfileForm";
+import { logout } from "@/lib/actions";
 
 export default function MyProfilePage() {
   // Temporary placeholder data
@@ -38,6 +39,17 @@ export default function MyProfilePage() {
           initialUsername={user.username}
         />
       </div>
+      <div className="mt-8 flex justify-end">
+        <form action={logout}>
+          <button
+            type="submit"
+            className="rounded-lg bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
+          >
+            Sign Out
+          </button>
+        </form>
     </div>
+
+    </div> 
   );
 }
