@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { auth } from "@/auth";
 import { getRecipes } from "@/lib/recipe-db";
-import { removeRecipe } from "@/lib/actions";
+import DeleteRecipeButton from "@/components/DeleteRecipeButton";
 
 export default async function RecipesPage() {
+  const session = await auth();
+  const isLoggedIn = !!session?.user;
   const recipes = await getRecipes();
 
   return (
@@ -18,14 +21,29 @@ export default async function RecipesPage() {
             My Recipes
           </Link>
 
-          <Link
-            href="/recipes/new"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Add Recipe
-          </Link>
+          {isLoggedIn ? (
+            <Link
+              href="/recipes/new"
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Add Recipe
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Sign in to Add Recipe
+            </Link>
+          )}
         </div>
       </div>
+
+      {!isLoggedIn ? (
+        <p className="mb-6 rounded border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+          You must be signed in to edit a recipe.
+        </p>
+      ) : null}
 
       <div className="space-y-6">
         {recipes.map((recipe) => (
@@ -49,21 +67,23 @@ export default async function RecipesPage() {
                 View
               </Link>
 
-              <Link
-                href={`/recipes/${recipe.id}/edit`}
-                className="bg-yellow-500 text-white px-4 py-2 rounded"
-              >
-                Edit
-              </Link>
-
-              <form action={removeRecipe.bind(null, recipe.id)}>
-                <button
-                  type="submit"
-                  className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+              {isLoggedIn ? (
+                <Link
+                  href={`/recipes/${recipe.id}/edit`}
+                  className="bg-yellow-500 text-white px-4 py-2 rounded"
                 >
-                  Delete
-                </button>
-              </form>
+                  Edit
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className="bg-yellow-500 text-white px-4 py-2 rounded"
+                >
+                  Sign in to Edit
+                </Link>
+              )}
+
+              <DeleteRecipeButton id={recipe.id} />
             </div>
           </div>
         ))}
