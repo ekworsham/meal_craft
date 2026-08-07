@@ -14,12 +14,6 @@ export default async function RecipesPage() {
         <h1 className="text-4xl font-bold">Recipes</h1>
 
         <div className="flex gap-3">
-          <Link
-            href="/recipes/myRecipes"
-            className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
-          >
-            My Recipes
-          </Link>
 
           {isLoggedIn ? (
             <Link
