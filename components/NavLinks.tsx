@@ -15,8 +15,8 @@ export default function NavLinks({ session }: NavLinksProps) {
 
   const linkClass = (href: string) =>
     pathname === href
-      ? "text-[#F77F00] font-semibold"
-      : "text-white hover:text-[#F77F00]";
+      ? "text-[orange] font-semibold"
+      : "text-white hover:text-[orange]";
 
   return (
     <ul className="flex items-center gap-6 text-sm font-medium">
