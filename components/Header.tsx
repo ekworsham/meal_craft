@@ -21,7 +21,7 @@ export default function Header({ session }: HeaderProps) {
         <div>
           <Logo />
           <h1 className="text-3xl font-bold text-white">
-            Meal<span className="text-accent">Craft</span>
+            Meal<span className="text-[#ffa900]">Craft</span>
           </h1>
 
           <p className="text-sm text-slate-200">

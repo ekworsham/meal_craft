@@ -1,4 +1,29 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "MealCraft Recipe Tracker",
+  description:
+    "MealCraft helps culinary enthusiasts organize recipes, manage ingredients, create shopping lists, and simplify meal planning.",
+  keywords: [
+    "recipes",
+    "recipe tracker",
+    "meal planning",
+    "grocery lists",
+    "cooking",
+    "recipe management",
+    "MealCraft",
+  ],
+  authors: [{ name: "Michael Rosser" }],
+  creator: "MealCraft",
+  openGraph: {
+    title: "MealCraft Recipe Tracker",
+    description:
+      "Organize recipes, manage ingredients, and generate grocery lists with MealCraft.",
+    images: ["/recipes.jpg"],
+    type: "website",
+  },
+};
 
 export default function Home() {
   return (
@@ -9,7 +34,7 @@ export default function Home() {
           MealCraft Recipe Tracker
         </h1>
 
-        <p className="mx-auto max-w-4xl text-lg text-gray-600">
+        <p className="mx-auto max-w-4xl text-lg ">
           MealCraft is a recipe management application designed for culinary
           enthusiasts who want to organize, store, update, and manage recipes
           online while simplifying meal planning and grocery shopping.
@@ -103,7 +128,7 @@ export default function Home() {
 
         <div className="grid gap-8 md:grid-cols-4">
           <div className="text-center">
-            <div className="mb-3 text-4xl font-bold text-[#F77F00]">1</div>
+            <div className="mb-3 text-4xl font-bold text-[#C44D00]">1</div>
             <h3 className="font-semibold">Create an Account</h3>
             <p className="mt-2 text-sm">
               Register and get started with your personal recipe management
@@ -112,7 +137,7 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <div className="mb-3 text-4xl font-bold text-[#F77F00]">2</div>
+            <div className="mb-3 text-4xl font-bold text-[#C44D00]">2</div>
             <h3 className="font-semibold">Build Your Profile</h3>
             <p className="mt-2 text-sm">
               Add information about yourself and customize your cooking profile.
@@ -120,7 +145,7 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <div className="mb-3 text-4xl font-bold text-[#F77F00]">3</div>
+            <div className="mb-3 text-4xl font-bold text-[#C44D00]">3</div>
             <h3 className="font-semibold">Create Recipes</h3>
             <p className="mt-2 text-sm">
               Save new recipes, update existing ones, and organize your
@@ -129,7 +154,7 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <div className="mb-3 text-4xl font-bold text-[#F77F00]">4</div>
+            <div className="mb-3 text-4xl font-bold text-[#C44D00]">4</div>
             <h3 className="font-semibold">Generate Shopping Lists</h3>
             <p className="mt-2 text-sm">
               Select recipes and automatically create grocery lists for your
