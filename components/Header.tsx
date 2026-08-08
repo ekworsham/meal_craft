@@ -31,6 +31,11 @@ export default function Header({ session }: HeaderProps) {
           <p className="text-xs text-slate-300 mt-1">
             {today}
           </p>
+                  {session?.user?.name && (
+          <p className="mt-2 text-sm text-accent font-medium">
+            Welcome, {session.user.name}!
+          </p>
+        )}
         </div>
 
         <NavLinks session={session} />
