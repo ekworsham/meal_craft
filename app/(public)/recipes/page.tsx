@@ -18,14 +18,14 @@ export default async function RecipesPage() {
           {isLoggedIn ? (
             <Link
               href="/recipes/new"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+              className="bg-blue-300 !text-black font-bold px-4 py-2 rounded hover:bg-blue-700 hover:!text-white"
             >
               Add Recipe
             </Link>
           ) : (
             <Link
               href="/login"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                className="bg-blue-300 !text-black font-bold px-4 py-2 rounded hover:bg-blue-700 hover:!text-white"
             >
               Sign in to Add Recipe
             </Link>
@@ -56,7 +56,7 @@ export default async function RecipesPage() {
             <div className="flex gap-3">
               <Link
                 href={`/recipes/${recipe.id}`}
-                className="bg-gray-600 text-white px-4 py-2 rounded"
+                className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-blue-100 transition-colors duration-200  disabled:opacity-50"
               >
                 View
               </Link>
@@ -64,14 +64,14 @@ export default async function RecipesPage() {
               {isLoggedIn ? (
                 <Link
                   href={`/recipes/${recipe.id}/edit`}
-                  className="bg-yellow-500 text-white px-4 py-2 rounded"
+                  className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-yellow-500 transition-colors duration-200  disabled:opacity-50"
                 >
                   Edit
                 </Link>
               ) : (
                 <Link
                   href="/login"
-                  className="bg-yellow-500 text-white px-4 py-2 rounded"
+                  className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-yellow-500 transition-colors duration-200  disabled:opacity-50"
                 >
                   Sign in to Edit
                 </Link>
