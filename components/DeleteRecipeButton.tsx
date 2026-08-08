@@ -24,7 +24,7 @@ export default function DeleteRecipeButton({
         <button
           type="submit"
           disabled={isPending}
-          className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700 disabled:opacity-50"
+          className="rounded bg-gray-600 px-4 py-2 text-white hover:bg-red-700 transition-colors duration-200 disabled:opacity-50"
         >
           {isPending ? "Deleting..." : "Delete"}
         </button>
