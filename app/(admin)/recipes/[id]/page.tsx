@@ -33,7 +33,7 @@ export default async function RecipePage({ params }: PageProps) {
       <div className="mt-8">
         <Link
           href="/recipes"
-          className="inline-block bg-gray-600 text-white px-6 py-3 rounded hover:bg-gray-700"
+          className="bg-blue-300 !text-black font-bold px-4 py-2 rounded hover:bg-blue-700 hover:!text-white"
         >
           ← Back to Recipes
         </Link>
