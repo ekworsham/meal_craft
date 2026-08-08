@@ -44,7 +44,7 @@ export default async function NewRecipePage() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-blue-300 !text-black font-bold px-4 py-2 rounded hover:bg-blue-700 hover:!text-white"
         >
           Save Recipe
         </button>
